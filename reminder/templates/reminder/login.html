@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'reminder/styles/registration_login.css' %}">
+{% endblock %}
+
+{% block main_heading %}
+  Login into existing account
+{% endblock %}
+{% block header_content %}
+  You don`t have an account yet?
+  <a href="{% url 'registration' %}">Create</a>
+{% endblock %}
+
+
+{% block content %}
+  <form method="POST" class="form-with-validation">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="form-field">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <div class="form-errors">{{ field.errors }}</div>
+        {% endif %}
+      </div>
+    {% endfor %}
+    <button class="form-submit">Submit</button>
+  </form>
+
+  {% load socialaccount %}
+  <form id="google-login-form" method="post" action="{% provider_login_url 'google' %}?next=/">
+  {% csrf_token %}
+    <button type="submit" class="form-submit">Login with Google</button>
+  </form>
+
+
+{% endblock %}

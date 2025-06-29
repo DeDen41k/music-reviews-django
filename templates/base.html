@@ -1,0 +1,67 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}My Django Blog{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'base.css' %}">
+  {% block css_files %}
+  {% endblock %}
+</head>
+<body>
+  <header id="main-header">
+    <nav>
+      <a href="/reminder" id="main-logo">ReminderYo</a>
+
+      <div class="search-container">
+        <form class="search-form" method="POST" action="{% url 'search' %}">
+          {% csrf_token %}
+
+          <div class="search-input-container">
+            <input
+              type="text"
+              name="searched"
+              class="search-input"
+              placeholder="Search music..."
+              autocomplete="off"
+            >
+            <button type="submit" class="search-button">
+              <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+
+      <div class="nav-links">
+        {% if user.is_authenticated %}
+            <h2>{{ user.username }}</h2>
+            <a href="{% url 'logout' %}" id="logout">Logout</a>
+        {% else %}
+        {% if request.resolver_match.url_name != 'login' %}
+            <a href="{% url 'login' %}" id="login">Login</a>
+        {% endif %}
+        {% if request.resolver_match.url_name != 'registration' %}
+            <a href="{% url 'registration' %}" id="registration">Register</a>
+        {% endif %}
+  {% endif %}
+</div>
+    </nav>
+    <h1>{% block main_heading %}{% endblock %}</h1>
+    {% block header_content %}{% endblock %}
+  </header>
+  
+  <main>
+    {% block content %}
+    
+    {% endblock %}
+  </main>
+
+  <script src="{% static 'js/navigation.js' %}"></script>
+</body>
+</html>

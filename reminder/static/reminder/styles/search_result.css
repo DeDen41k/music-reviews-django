@@ -1,0 +1,427 @@
+/* Search Results Page Styling */
+
+/* Section Container */
+section {
+  background: var(--gradient-surface);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  border: 2px solid var(--border-color);
+  box-shadow: var(--shadow-primary);
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  transition: left 0.8s ease;
+}
+
+/* Typography Enhancements */
+section h1 {
+  font-size: 2.25rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  animation: slideInRight 0.8s ease-out 0.2s both;
+}
+
+section h2 {
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--primary-light);
+  margin: 2.5rem 0 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--border-accent);
+  position: relative;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+section h2::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+section h2:hover::after {
+  width: 120px;
+}
+
+section h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 2rem;
+  background: var(--surface-accent);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Enhanced List Styling */
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+/* Item Base Styling */
+.album-item,
+.song-item,
+.artist-item {
+  background: var(--surface-light);
+  border-radius: 16px;
+  border: 2px solid var(--border-color);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-secondary);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.album-item:nth-child(even),
+.song-item:nth-child(even),
+.artist-item:nth-child(even) {
+  animation-delay: 0.1s;
+}
+
+.album-item:nth-child(3n),
+.song-item:nth-child(3n),
+.artist-item:nth-child(3n) {
+  animation-delay: 0.2s;
+}
+
+/* Hover Effects */
+.album-item:hover,
+.song-item:hover,
+.artist-item:hover {
+  transform: translateY(-8px) scale(1.02);
+  border-color: var(--primary-color);
+  box-shadow: var(--shadow-warm), var(--shadow-primary);
+  background: var(--surface-accent);
+}
+
+/* Article Styling */
+article {
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+}
+
+/* Album-specific styling */
+.album-item article {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+
+.album-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-secondary);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.album-image:hover {
+  transform: scale(1.05) rotate(2deg);
+  box-shadow: var(--shadow-warm);
+}
+
+.album-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.3s ease;
+}
+
+.album-image:hover img {
+  transform: scale(1.1);
+}
+
+/* Details Styling */
+.album-details,
+.song-details,
+.artist-details {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.album-details h3,
+.song-details h3,
+.artist-details h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease;
+  animation: none;
+  text-align: left;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+}
+
+.album-item:hover .album-details h3,
+.song-item:hover .song-details h3,
+.artist-item:hover .artist-details h3 {
+  color: var(--primary-light);
+  transform: translateX(8px);
+}
+
+.song-details p {
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+}
+
+.song-item:hover .song-details p {
+  color: var(--text-primary);
+  transform: translateX(4px);
+}
+
+/* Enhanced Button Styling */
+.album-actions,
+.song-actions,
+.artist-actions {
+  display: flex;
+  align-items: center;
+}
+
+.btn {
+  background: var(--gradient-primary);
+  color: var(--background-color);
+  text-decoration: none;
+  padding: 0.875rem 1.75rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid var(--primary-color);
+  box-shadow: var(--shadow-secondary);
+  white-space: nowrap;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.4s ease;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn:hover {
+  background: var(--gradient-secondary);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: var(--shadow-warm), 0 8px 20px rgba(0, 0, 0, 0.3);
+  color: var(--text-primary);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Song and Artist Items (simplified layout) */
+.song-item article,
+.artist-item article {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+/* Decorative Elements */
+.album-item::before,
+.song-item::before,
+.artist-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-primary);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.3s ease;
+}
+
+.album-item:hover::before,
+.song-item:hover::before,
+.artist-item:hover::before {
+  transform: scaleY(1);
+}
+
+/* Responsive Grid Layouts */
+@media (min-width: 1200px) {
+  ol {
+    grid-template-columns: repeat(auto-fit, minmax(600px, 1fr));
+  }
+}
+
+/* Enhanced Mobile Responsiveness */
+@media (max-width: 768px) {
+  section {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+
+  section h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+  }
+
+  ol {
+    gap: 1rem;
+  }
+
+  /* Mobile Album Layout */
+  .album-item article {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .album-image {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .album-details,
+  .song-details,
+  .artist-details {
+    padding: 0;
+  }
+
+  .album-actions,
+  .song-actions,
+  .artist-actions {
+    justify-content: center;
+    grid-column: 1;
+  }
+
+  /* Mobile Song/Artist Layout */
+  .song-item article,
+  .artist-item article {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  article {
+    padding: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  section {
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  section h1 {
+    font-size: 1.5rem;
+  }
+
+  section h2 {
+    font-size: 1.25rem;
+  }
+
+  .album-image {
+    width: 80px;
+    height: 80px;
+  }
+
+  article {
+    padding: 1rem;
+  }
+
+  .album-details h3,
+  .song-details h3,
+  .artist-details h3 {
+    font-size: 1.1rem;
+  }
+
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* Loading Animation for Dynamic Content */
+@keyframes shimmer {
+  0% { background-position: -200px 0; }
+  100% { background-position: calc(200px + 100%) 0; }
+}
+
+.loading-placeholder {
+  background: linear-gradient(90deg, var(--surface-color) 25%, var(--surface-light) 50%, var(--surface-color) 75%);
+  background-size: 200px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Custom Scrollbar for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}

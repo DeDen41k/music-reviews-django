@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Search results
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'reminder/styles/search_result.css' %}">
+{% endblock %}
+
+
+{% block main_heading %}Results for your search{% endblock %}
+
+{% block content %}
+    <section>
+      {% if result %}
+        <h1>You search for "{{ result }}"</h1>
+
+        {% if albums %}
+        <h2>Albums found:</h2>
+          <ol>
+          {% for album in albums %}
+            <li class="album-item">
+              <article>
+                  <div class="album-image">
+                    <img src="{{ album.cover_image.url }}" alt="{{ album.title }} cover">
+                  </div>
+                  <div class="album-details">
+                    <h3>'{{ album.title }}' by {{ album.artist }}</h3>
+                  </div>
+                <div class="album-actions">
+                    <a href="{% url 'album_details' album.slug %}" class="btn">More details</a>
+                </div>
+              </article>
+            </li>
+          {% endfor %}
+          </ol>
+        {% endif %}
+
+        {% if songs %}
+        <h2>Songs found:</h2>
+          <ol>
+          {% for song in songs %}
+            <li class="song-item">
+              <article>
+                  <div class="song-details">
+                    <h3>'{{ song.title }}' by {{ song.artist }}</h3>
+                    {% if song.album %}
+                      <p>from album '{{ song.album.title }}'</p>
+                    {% endif %}
+                  </div>
+
+                {% if song.description %}
+                  <div class="song-actions">
+                      <a href="{% url 'song_details' song.slug %}" class="btn">More details</a>
+                  </div>
+                {% endif %}
+              </article>
+            </li>
+          {% endfor %}
+          </ol>
+        {% endif %}
+
+        {% if artists %}
+        <h2>Artists found:</h2>
+          <ol>
+          {% for artist in artists %}
+            <li class="artist-item">
+              <article>
+                  <div class="artist-details">
+                    <h3>{{ artist.name }}</h3>
+                  </div>
+
+                {% if artist.bio %}
+                  <div class="artist-actions">
+                      <a href="{% url 'artist_details' artist.slug %}" class="btn">More details</a>
+                  </div>
+                {% endif %}
+              </article>
+            </li>
+          {% endfor %}
+          </ol>
+        {% endif %}
+
+      {% else %}
+        <h3>Yo mama doesn`t love ya</h3>
+      {% endif %}
+    </section>
+
+{% endblock %}

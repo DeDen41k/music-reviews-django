@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+{{ album.title }}
+{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'reminder/styles/album_detail.css' %}">
+{% endblock %}
+
+{% block main_heading %}
+  '{{ album.title }}' by <a href="{% url 'artist_details' album.artist.slug %}">{{ album.artist }}</a>
+{% endblock %}
+{% block header_content %}Released on: {{ album.release_date }}{% endblock %}
+
+
+
+{% block content %}
+  {% if album_found %}
+    <article>
+      <img id="main-image" src="{{ album.cover_image.url }}" alt="{{ album.title }} cover">
+
+      <section id="details">
+        <h2>{{ avg_rating }}/10</h2>
+        <h2>About the album</h2>
+        <p>Genres:
+          {% for genre in genres %}
+            <a href="{% url 'genre_details' genre.slug %}">{{ genre }}</a>;
+          {% endfor %}
+        </p>
+        <p>Length: {{ album.length }}</p>
+        <p>{{ album.description }}</p>
+
+        <footer>
+          <p>Need more details? Google it yourself bitch</p>
+        </footer>
+      </section>
+
+      <section id="tracklist">
+        <h2>Tracklist ({{ album.number_of_songs }} songs)</h2>
+        <ol>
+          {% for song in tracklist %}
+            <li>
+              {% if song %}
+                <strong>{{ song.title }}</strong> — {{ song.duration }}
+                {% if song.description %}
+                  <a href="{% url 'song_details' song.slug %}"> (Details) </a>
+                {% endif %}
+              {% else %}
+                <em>Song {{ forloop.counter }}: [Not added]</em>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ol>
+      </section>
+
+      {% if user.is_authenticated %}
+        <section id="review">
+          <h2>Rate this</h2>
+          <form method="POST" action="{% url 'album_details' album.slug %}">
+            {% csrf_token %}
+            <ul>
+              {{ form.as_ul }}
+            </ul>
+            <div id="review-actions">
+              <button>Submit</button>
+            </div>
+          </form>
+        </section>
+      {% else %}
+        <section id="review" class="review-unauthenticated">
+          <h2>Leave a Review</h2>
+          <p>You need to be logged in to leave a review.</p>
+          <div class="login-cta">
+            <a href="{% url 'login' %}" class="button-link">Log In</a>
+          </div>
+        </section>
+      {% endif %}
+
+      {% for review in album.reviews.all %}
+        <div class="review">
+          <div class="review-header">
+              <span class="review-author">{{ review.user }}</span>
+              <span class="review-score">{{ review.rating }}/10</span>
+          </div>
+           <p class="review-comment">{{ review.comment }}</p>
+        </div>
+      {% endfor %}
+
+    </article>
+  {% else %}
+    <p>No album found</p>
+  {% endif %}
+
+{% endblock %}

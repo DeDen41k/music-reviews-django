@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ genre.name }}{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'reminder/styles/artist-song-genre_detail.css' %}">
+{% endblock %}
+
+{% block main_heading %}
+  {{ genre.name }}
+{% endblock %}
+
+
+{% block content %}
+  {% if genre.description %}
+    <div class="genre-description">
+      <p>{{ genre.description }}</p>
+    </div>
+  {% endif %}
+{% endblock %}

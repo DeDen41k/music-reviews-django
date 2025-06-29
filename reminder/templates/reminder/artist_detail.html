@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}{{ artist.name }}{% endblock %}
+
+{% block css_files %}
+  <link rel="stylesheet" href="{% static 'reminder/styles/artist-song-genre_detail.css' %}">
+{% endblock %}
+
+{% block main_heading %}
+  {{ artist.name }}
+{% endblock %}
+
+
+{% block content %}
+  {% if artist.bio %}
+    <div class="artist-bio">
+      <p>{{ artist.bio }}</p>
+    </div>
+
+    <div class="artist-albums">
+      {% if albums %}
+        <h2>Albums from {{ artist.name }}:</h2>
+          <ol>
+          {% for album in albums %}
+            <li class="album-item">
+              <article>
+                  <div class="album-image">
+                    <img src="{{ album.cover_image.url }}" alt="{{ album.title }} cover">
+                  </div>
+                  <div class="album-details">
+                    <h3>'{{ album.title }}' ({{ album.release_date }})</h3>
+                  </div>
+                <div class="album-actions">
+                    <a href="{% url 'album_details' album.slug %}" class="btn">More details</a>
+                </div>
+              </article>
+            </li>
+          {% endfor %}
+          </ol>
+        {% endif %}
+    </div>
+  {% endif %}
+{% endblock %}

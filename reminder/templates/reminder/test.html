@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+My Page Title
+{% endblock %}
+
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'reminder/styles/all_albums.css' %}">
+{% endblock %}
+
+
+{% block main_heading %}We got something to remind you{% endblock %}
+{% block header_content %}<p>You lazy mothefucker</p>{% endblock %}
+
+{% block content %}
+    <section>
+      <h2>Listen to this u cunt</h2>
+      {% if show_albums %}
+        <ol>
+          {% for album in some_list %}
+            <li class="album-item">
+              <article>
+                <div class="album-summary">
+                  <div class="album-image">
+                    <img src="{{ album.cover_image.url }}" alt="{{ album.title }} cover">
+                  </div>
+                  <div class="album-details">
+                    <h3>{{ album.title }}</h3>
+                    <p>by {{ album.artist }}</p>
+                  </div>
+                </div>
+                <div class="album-actions">
+                    <a href="{% url 'album_details' album.slug %}" class="btn">More details</a>
+                </div>
+              </article>
+            </li>
+          {% endfor %}
+        </ol>
+      {% else %}
+        <h3>Yo mama doesn`t love ya</h3>
+      {% endif %}
+    </section>
+
+{% endblock %}
